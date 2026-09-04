@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poker_WPF", "Poker_WPF.csproj", "{F8F88C7A-C070-40AD-ACAE-DB973AE11EC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8F88C7A-C070-40AD-ACAE-DB973AE11EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F88C7A-C070-40AD-ACAE-DB973AE11EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F88C7A-C070-40AD-ACAE-DB973AE11EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F88C7A-C070-40AD-ACAE-DB973AE11EC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {69EA8010-EAF2-4063-88C1-1BB1C4643CE7}
+	EndGlobalSection
+EndGlobal

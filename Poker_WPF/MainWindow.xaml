@@ -1,0 +1,86 @@
+﻿<Window x:Class="Poker_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Poker_WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="830">
+    <Grid Margin="10">
+        <Grid.RowDefinitions> <!-- ich habe ich definiert das ich zeilen erstelle, und unten sind 6 RowDefinition das heißt ich habe 6 Zeilen -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Titel -->
+        <TextBlock Text="♠ Texas Hold'em Poker ❤️" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Margin="0, 0, 0, 12"/>
+        
+        <!-- Die eigene Hand (2 Karten) -->
+        <TextBlock Grid.Row="1" Text="Deine Hand: " FontSize="18" FontWeight="Bold" Margin="5, 5"/>
+        <ItemsControl Grid.Row="2" Name="Karten" ItemsSource="{Binding Hand}" Margin="0, 5, 0, 15"> <!--dadruch das die Row.Definition auto ist zeigt es nichts, aber sobald die Werte rein kommen wird es gezeigt werden-->
+            <ItemsControl.ItemsPanel> <!-- das ist die formatierung mehrere items zueinander-->
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            
+            <ItemsControl.ItemTemplate> <!-- das ist die formatierung eines items-->
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="5" Padding="10" CornerRadius="5" Background="White"> <!--Margin = Außenabstand; Padding = Innenabstand-->
+                        <StackPanel>
+                            <TextBlock Text="{Binding SymbolString}" FontSize ="24"/>
+                            <TextBlock Text="{Binding WertString}" FontSize="18"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- Community Karten -->
+        <TextBlock Grid.Row="3" Text="Community Karten: " FontSize="18" FontWeight="Bold" Margin="5, 5"/>
+        <ItemsControl Grid.Row="4" Name="CommunityKarten" ItemsSource="{Binding CommunityHand}" Margin="0, 5, 0, 15">
+            <ItemsControl.ItemsPanel>
+                <!-- das ist die formatierung mehrere items zueinander-->
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <!-- das ist die formatierung eines items-->
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="5" Padding="10" CornerRadius="5" Background="White">
+                        <!--Margin = Außenabstand; Padding = Innenabstand-->
+                        <StackPanel>
+                            <TextBlock Text="{Binding SymbolString}" FontSize ="24"/>
+                            <TextBlock Text="{Binding WertString}" FontSize="18"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
+        <!-- 3. Buttons -->
+        <StackPanel Grid.Row="5" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,10">
+            <TextBlock Name="BesteHandText" FontSize="20" FontWeight="Bold" Foreground="DarkGreen" HorizontalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0, 5"> <!-- das hier ist nur für die Test werte erstellt worden, nachdem ich fertig bin, kann ich das löschen oder auskommentieren-->
+                <TextBlock Text="Hier werden die Zahlen eingegeben: " FontSize="14"/>
+                <TextBox Name="TestWerte" Text="(zb: 0:❤️ 1:♦ 2:♣️ 3:♠, Wert 0:2 -12:A)" Margin="10, 2" Width="220"/>
+                <Button Click="WerteTesten_Click" Content="Werte senden" Width="120" Margin="90, 5, 10, 5"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Margin="0, 10">
+                <Button Content="🔁 neue Runde" Name="NeueRundeButton" Width="140" Height="45" Margin="5" Click="NeueRunde_Click"/>
+                <Button Content="♠ Flop (3 Karten)" Name="FlopButton" Width="140" Height="45" Margin="5" Click="Flop_Click"/>
+                <Button Content="♦ Turn" Name="TurnButton" Width="120" Height="45" Margin="5" Click="Turn_Click"/>
+                <Button Content="♣️ River" Name="RiverButton" Width="120" Height="45" Margin="5" Click="River_Click"/>
+                <Button Content="👀 Beste Hand finden" Name="BesteHandButton" Width="150" Height="45" Margin="5" Click="BesteHand_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
