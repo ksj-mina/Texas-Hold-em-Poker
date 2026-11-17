@@ -33,5 +33,10 @@ namespace Poker_WPF.Models
             for (int i = 0; i < 2; i++) 
                 Hand.Add(stapel.Ziehen());
         }
+
+        public void NeuerStapel() // das ist die Methode für den neuen Stapel
+        {
+            Stapel = new Stapel();
+        }
     }
 }
