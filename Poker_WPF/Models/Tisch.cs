@@ -26,6 +26,10 @@ namespace Poker_WPF.Models
             CommunityHand = new ObservableCollection<Karten>();
             stapel = new Stapel();
         }
+        public void NeuerStapel()
+        {    
+            Stapel = new Stapel();
+        }
 
         private int assWert = 14; // die 2 werden nicht verwendet
         private int[] wertStaerkeFinden = new int[3];
@@ -54,51 +58,6 @@ namespace Poker_WPF.Models
         {
             CommunityHand.Add(stapel.Ziehen());
         }
-        /*private string FindeBesteHand (List<Karten> alleKarten) //ist doch wichtig wenn ich mehrere spieler habe !!!----------------------------------------------------------------------------------------------------------
-        {
-            var kombinationen = GetKombinationen(alleKarten, 5);
-
-            string besteBewertung = "Keine Hand";
-            int besteStaerke = -1;
-
-            foreach (var hand in kombinationen)
-            {
-                string bewertung = HandAuswertung(hand);
-                int staerke = GetKombiStaerke(bewertung);
-
-                if(staerke > besteStaerke)
-                {
-                    besteStaerke = staerke;
-                    besteBewertung = bewertung;
-                }
-            }
-
-            return besteBewertung;
-        }
-
-        private List<List<Karten>> GetKombinationen(List<Karten> list, int k) //finde unnötig-----------------------------------------------------------------------------------------
-        {
-            var result = new List<List<Karten>>();
-            Kombiniere(list, k, 0, new List<Karten>(), result);
-            return result;
-        }
-
-
-        private void Kombiniere(List<Karten> list, int k, int start, List<Karten> aktuell, List<List<Karten>> result) //finde unnötig--------------------------------------------------------
-        {
-            if(aktuell.Count == k)
-            {
-                result.Add(new List<Karten>(aktuell));
-                return;
-            }
-
-            for (int i = start; i < list.Count; i++)
-            {
-                aktuell.Add(list[i]);
-                Kombiniere(list, k, +1, aktuell, result);
-                aktuell.RemoveAt(aktuell.Count - 1);
-            }
-        }*/
 
         public string HandAuswertung(List<Karten> alleKarten, int assWert, int[] wertStaerke) // hier wird die hand herausgefunden 
         { // ich muss hier auch, die 5 karten speichern die dann einen wert spielen
@@ -297,89 +256,22 @@ namespace Poker_WPF.Models
         int wertStaerkeIndex = 0;
         public int GetWertStaerke(int[] wert, int assWert) // das ist irgendwie voll ünnötig, ich glaube ich werde das weg machen 
         {
-            bool staerkeGegeben = false;
             int staerke = -1;
             for (int i = wertStaerkeIndex; i < wert.Length; i++)
             {
                 wertStaerkeIndex = i;
 
-                if (staerkeGegeben)
-                {
-                    staerkeGegeben = false; 
+                if (wert[i] > 0)
+                {    
+                    if (wert[i] == 14)
+                        staerke = assWert;
+                    else 
+                        staerke = wert[i];
                     break;
                 }
-                if (wertStaerkeIndex == wert.Length - 1) // nach dem ich das geamcht habe, habe ich irgendein fehler, kann aber erst schauen wenn data binding wieder funktioniert 
-                { // ok ka was hier falsch ist 
-                    wertStaerkeIndex = 0;
-                    i = wertStaerkeIndex; 
-                }
-
-                if (wert[i] == 14)
-                    staerke = assWert;
-                else
-                    staerke = wert[i];
-
-                if (wert[i] > 0)
-                    staerkeGegeben = true;
-
-                /*switch (wert[i]) // ich muss überlegen, wie ich das noch machen, falls 2 spieler den selben wert haben. weil hier gebe ich nur den ersten wert aus, anstatt alle..., ich habe auch schon bisschen eine grobe idee.
-                {
-                    case 14: 
-                        staerke = assWert;
-                        breackGemacht = true;
-                        break;
-                    case 13: 
-                        staerke = 13;
-                        breackGemacht = true;
-                        break;
-                    case 12:
-                        staerke = 12;
-                        breackGemacht = true;
-                        break;
-                    case 11:
-                        staerke = 11;
-                        breackGemacht = true;
-                        break;
-                    case 10:
-                        staerke = 10;
-                        breackGemacht = true;
-                        break;
-                    case 9:
-                        staerke = 9;
-                        breackGemacht = true;
-                        break;
-                    case 8:
-                        staerke = 8;
-                        breackGemacht = true;
-                        break;
-                    case 7:
-                        staerke = 7;
-                        breackGemacht = true;
-                        break;
-                    case 6:
-                        staerke = 6;
-                        breackGemacht = true;
-                        break;
-                    case 5:
-                        staerke = 5;
-                        breackGemacht = true;
-                        break;
-                    case 4:
-                        staerke = 4;
-                        breackGemacht = true;
-                        break;
-                    case 3:
-                        staerke = 3;
-                        breackGemacht = true;
-                        break;
-                    case 2:
-                        staerke = 2;
-                        breackGemacht = true;
-                        break;
-                    default:
-                        continue;
-                }*/
             }
+            if (wertStaerkeIndex == wert.Length - 1) // nach dem ich das geamcht habe, habe ich irgendein fehler, kann aber erst schauen wenn data binding wieder funktioniert 
+                wertStaerkeIndex = 0;
             return staerke;
         }
     }
