@@ -26,10 +26,10 @@ namespace Poker_WPF.Models
             }
             FischerYatesAlgorithm();
         }
-        
+
+        private static readonly Random randomFY = new Random();
         public void FischerYatesAlgorithm() // die karten werden gemischt
         {
-            Random randomFY = new Random();
             for (int i = stapel.Count - 1; i > 0; i--)
             {
                 int j = randomFY.Next(i + 1);
@@ -39,6 +39,9 @@ namespace Poker_WPF.Models
 
         public Karten Ziehen()
         {
+            if (stapel.Count == 0)
+                throw new InvalidOperationException("Der Stapel ist leer. ");
+            
             Karten obersteKarte = stapel[0];
             stapel.RemoveAt(0);
             return obersteKarte;
